@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap');
+
+:root{
+  --bg: #f6f3ee;
+  --bg-deep: #e9e4dc;
+  --panel: #fdfcfb;
+  --ink: #1f1a17;
+  --muted: #6b615b;
+  --accent: #d97706;
+  --accent-strong: #b45309;
+  --line: #e8e1d7;
+  --glass: rgba(253,252,251,0.72);
+  --shadow: 0 14px 40px rgba(23,16,11,0.08);
+  --die-top: #fff4e8;
+  --die-left: #f4eadc;
+  --die-right: #e7d6c4;
+  --die-outline: rgba(30,24,20,0.5);
+  --tv-bg: radial-gradient(circle at top,#0f1217,#0a0c10);
+  --tv-panel: linear-gradient(180deg,#121722,#0c1119);
+  --tv-accent: #8aa2ff;
+  --tv-text: #f5f7fb;
+  --tv-muted: #b0bed6;
+  --tv-border: rgba(138,162,255,0.2);
+  font-family: "Space Grotesk", "Manrope", "Segoe UI", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body.no-scroll{overflow:hidden}
+body{margin:0;background:radial-gradient(circle at top left,var(--bg),var(--bg-deep));color:var(--ink)}
+
+.theme-dark{
+  /* Synthwave-inspired dark theme */
+  --bg: #0a0420; /* deep indigo */
+  --bg-deep: #050014; /* near-black */
+  --panel: rgba(18,10,32,0.64); /* translucent panel */
+  --ink: #e6f9ff; /* pale cyan text */
+  --muted: #9aa3d6; /* muted neon */
+  --accent: #ff2d95; /* neon pink */
+  --accent-strong: #00ffd5; /* neon cyan */
+  --line: rgba(255,45,149,0.08); /* subtle neon divider */
+  --glass: rgba(18,8,30,0.6);
+  --shadow: 0 20px 48px rgba(0,0,0,0.6);
+  --die-top: #23102a;
+  --die-left: #180a20;
+  --die-right: #0e0714;
+  --die-outline: rgba(255,45,149,0.45);
+  --tv-bg: radial-gradient(circle at top,#120226,#060014);
+  --tv-panel: linear-gradient(180deg,#140a2a,#07021a);
+  --tv-accent: #ff6ad5;
+  --tv-text: #eafcff;
+  --tv-muted: #8aa7d9;
+  --tv-border: rgba(0,255,213,0.08);
+}
+.app{max-width:1200px;margin:20px auto;padding:22px}
+.header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;flex-direction:column;gap:4px}
+.brand-mark{font-size:28px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.brand-sub{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.2em}
+.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.panel{background:var(--panel);border-radius:18px;padding:18px;box-shadow:var(--shadow);border:1px solid var(--line)}
+
+.layout{display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:18px}
+@media (max-width:980px){.layout{grid-template-columns:1fr}}
+
+.app-shell{display:grid;grid-template-columns:260px 1fr 260px;gap:16px;margin-top:18px;align-items:start}
+.main{display:flex;flex-direction:column;gap:16px}
+.quick-roll .quick-row{display:flex;gap:12px;align-items:center}
+.quick-roll .input{flex:1}
+.quick-roll .roll-btn{white-space:nowrap}
+.sidebar{display:flex;flex-direction:column;gap:12px}
+.sidebar .panel{box-shadow:none}
+.sidebar-left .selector-panel{padding:14px}
+.sidebar-right .macro-list-panel{padding:14px}
+.sidebar-left .dice-selector{grid-template-columns:1fr}
+.sidebar-left .dice-card{flex-direction:row;justify-content:space-between;align-items:center;padding:10px 12px;width:100%}
+.sidebar-left .dice-visual{flex-direction:row;gap:10px;align-items:center;justify-content:flex-start}
+.sidebar-left .dice-visual .die-shape{width:46px;height:46px}
+.sidebar-left .dice-type{font-size:13px;letter-spacing:.08em}
+.sidebar-left .dice-counter{margin-left:auto}
+.sidebar-left .dice-counter button{width:26px;height:26px}
+.sidebar-left .roll-actions{flex-direction:column;align-items:stretch}
+.sidebar-left .roll-btn{width:100%}
+.sidebar-right .macro-grid{grid-template-columns:1fr}
+.sidebar-right .macro-card{padding:8px 10px}
+.sidebar-right .macro-run{flex-direction:row;align-items:center;gap:10px}
+.sidebar-right .macro-text{font-size:11px}
+.sidebar-header{display:flex;align-items:center;justify-content:space-between}
+.close-btn{border:none;background:transparent;font-size:22px;cursor:pointer;color:var(--muted)}
+.collapse-btn{border:none;background:var(--panel);border:1px solid var(--line);padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:600}
+.sidebar-toggle{display:none;border:1px solid var(--line);background:var(--panel);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:600}
+.theme-btn{border:1px solid var(--line);background:var(--panel);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:600}
+.sidebar-backdrop{display:none}
+
+@media (max-width:1100px){
+  .app-shell{grid-template-columns:220px 1fr 220px}
+}
+
+@media (min-width:981px){
+  .sidebar-toggle{display:none}
+  .sidebar{position:sticky;top:18px}
+}
+
+@media (max-width:980px){
+  .app-shell{grid-template-columns:1fr}
+  .sidebar{position:fixed;top:0;bottom:0;width:86%;max-width:320px;z-index:20;background:var(--panel);padding:18px 14px;box-shadow:0 30px 80px rgba(0,0,0,0.25);transform:translateX(-110%);transition:transform 220ms ease}
+  .sidebar-right{right:0;left:auto;transform:translateX(110%)}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-toggle{display:inline-flex}
+  .sidebar-backdrop{display:block;position:fixed;inset:0;background:rgba(10,12,16,0.35);z-index:15}
+  .quick-roll .quick-row{flex-direction:column;align-items:stretch}
+}
+
+.panel-title{font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--muted);margin-bottom:12px}
+.hint{color:var(--muted);font-size:14px}
+
+.selector-panel{position:relative;overflow:hidden}
+.dice-selector{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px}
+.dice-card{display:flex;flex-direction:column;gap:8px;align-items:center;background:linear-gradient(180deg,rgba(255,45,149,0.06),rgba(0,255,213,0.02));border:1px solid transparent;border-radius:16px;padding:12px}
+.theme-dark .dice-card{background:transparent;border:1px solid rgba(255,45,149,0.06)}
+.dice-card.active{border-color:rgba(255,45,149,0.18);box-shadow:0 10px 30px rgba(0,0,0,0.6), 0 0 22px rgba(255,45,149,0.04) inset}
+.theme-dark .dice-card .icon-btn{background:transparent}
+.theme-dark .dice-visual button{background:transparent}
+.dice-visual{width:100%;border:none;background:transparent;display:flex;flex-direction:column;gap:8px;align-items:center;cursor:pointer;position:relative}
+.dice-visual .die-shape svg{filter:drop-shadow(0 6px 18px rgba(0,0,0,0.6))}
+.dice-visual .die-shape{width:68px;height:68px}
+.die-shape .die-outline{fill:none;stroke:var(--die-outline);stroke-width:3}
+.die-shape .die-face-left{fill:var(--die-left)}
+.die-shape .die-face-right{fill:var(--die-right)}
+.die-shape .die-face-top{fill:var(--die-top)}
+.dice-type{font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+.dice-counter{display:flex;align-items:center;gap:10px;background:rgba(31,26,23,0.06);border-radius:999px;padding:6px 10px}
+.theme-dark .dice-counter{background:rgba(255,255,255,0.06)}
+.dice-counter button{width:28px;height:28px;border:none;border-radius:999px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;font-weight:700}
+.dice-counter button svg{display:block}
+.dice-counter button{display:flex;align-items:center;justify-content:center;padding:0}
+.dice-counter button:focus{outline:2px solid rgba(0,255,213,0.18);outline-offset:2px}
+.dice-counter .count{width:24px;text-align:center;font-weight:700}
+
+.roll-actions{margin-top:16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.roll-btn{background:var(--accent);color:white;border:none;padding:12px 18px;border-radius:999px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.08em}
+.roll-btn:active{transform:translateY(1px)}
+.danger-btn{background:transparent;border:none;color:#b91c1c;cursor:pointer;font-weight:600}
+
+.modifier-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:8px 10px;border-radius:12px;background:rgba(31,26,23,0.04)}
+.theme-dark .modifier-row{background:rgba(255,255,255,0.04)}
+.modifier-label{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.modifier-control{display:flex;align-items:center;gap:8px}
+.modifier-control button{width:26px;height:26px;border:none;border-radius:999px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;font-weight:700}
+.modifier-control input{width:70px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);background:var(--panel);font-weight:700;text-align:center}
+
+.dice-area{min-height:320px;display:flex;flex-wrap:wrap;gap:14px;align-content:flex-start;padding:14px;background:linear-gradient(180deg,#fdfcfb,#f6f0e8)}
+.theme-dark .dice-area{background:linear-gradient(180deg,#0b0420,#060014);}
+.die{width:96px;height:96px;border-radius:18px;background:linear-gradient(180deg,#fff6ea,#f3e4d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;font-weight:700;color:var(--ink);box-shadow:0 12px 28px rgba(23,16,11,0.12);position:relative;overflow:hidden}
+.theme-dark .die{background:linear-gradient(180deg,#23102a,#0e0714);box-shadow:0 18px 48px rgba(0,0,0,0.7), 0 0 18px rgba(255,45,149,0.06) inset;border:1px solid rgba(255,45,149,0.06)}
+.die.tv{width:130px;height:130px}
+.die .die-shape{width:72px;height:72px}
+.die .die-shape .die-outline{stroke:var(--die-outline)}
+.die .die-shape .die-face-left{fill:var(--die-left)}
+.die .die-shape .die-face-right{fill:var(--die-right)}
+.die .die-shape .die-face-top{fill:var(--die-top)}
+.die-value{font-size:26px;font-weight:800;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.die-label{display:none}
+
+.tv-btn{display:flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--panel);padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:600}
+.tv-emoji{font-size:18px}
+.toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.toggle input{accent-color:var(--accent)}
+
+.macro-editor .macro-row{display:flex;gap:10px;margin-bottom:10px}
+.input,.select{flex:1;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);font-family:inherit}
+.macro-actions{display:flex;justify-content:flex-end}
+.icon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(44px,1fr));gap:8px;margin:10px 0}
+.icon-btn{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:6px;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;min-height:44px;overflow:hidden}
+.icon-btn.active{border-color:rgba(217,119,6,.6);box-shadow:0 8px 18px rgba(180,83,9,0.16)}
+
+/* Ensure buttons and form controls are legible in dark theme - use cyan neon as primary */
+.theme-dark button{background:var(--accent-strong);color:#031019;border:1px solid rgba(0,0,0,0.18);box-shadow:0 10px 30px rgba(0,255,213,0.08);padding:8px 12px;border-radius:10px;cursor:pointer}
+.theme-dark button:hover{box-shadow:0 18px 48px rgba(0,255,213,0.14);transform:translateY(-1px)}
+.theme-dark button:active{transform:translateY(0);box-shadow:0 8px 20px rgba(0,255,213,0.06)}
+
+/* Exceptions: small icon-like controls keep transparent style */
+.theme-dark .close-btn{background:transparent;color:var(--muted);border:none;box-shadow:none}
+.theme-dark .macro-delete{background:transparent;color:#ff6a6a;border:none;box-shadow:none}
+
+/* Inputs, selects and panel text */
+.theme-dark .input,.theme-dark .select,.theme-dark .modifier-control input{background:rgba(255,255,255,0.03);color:var(--ink);border:1px solid rgba(255,45,149,0.06)}
+.theme-dark .panel{background:linear-gradient(180deg,rgba(18,10,32,0.6),rgba(8,4,18,0.5));border:1px solid rgba(255,45,149,0.04)}
+
+/* Make the primary roll button cyan neon in dark theme for stronger contrast */
+.theme-dark .roll-btn{background:var(--accent-strong);color:#031019;border:1px solid rgba(0,0,0,0.25);box-shadow:0 10px 30px rgba(0,255,213,0.08), 0 0 18px rgba(0,255,213,0.04) inset}
+.theme-dark .roll-btn:hover{box-shadow:0 18px 48px rgba(0,255,213,0.14),0 0 28px rgba(0,255,213,0.06);transform:translateY(-2px)}
+.theme-dark .roll-btn:active{transform:translateY(0);box-shadow:0 8px 20px rgba(0,255,213,0.06)}
+
+/* Subtle neon pulse for primary buttons in dark mode */
+@keyframes neonPulse{
+  0%{box-shadow:0 8px 20px rgba(0,255,213,0.04), 0 0 0 rgba(0,255,213,0)}
+  50%{box-shadow:0 14px 36px rgba(0,255,213,0.08), 0 0 22px rgba(0,255,213,0.02)}
+  100%{box-shadow:0 8px 20px rgba(0,255,213,0.04), 0 0 0 rgba(0,255,213,0)}
+}
+
+/* Apply micro animation only to the primary roll button to reduce motion scope */
+.theme-dark .roll-btn{
+  animation: neonPulse 6s ease-in-out infinite;
+  transition:transform 160ms ease, box-shadow 200ms ease;
+}
+
+/* Reduce motion preference respect */
+@media (prefers-reduced-motion: reduce){
+  .theme-dark .roll-btn{animation: none}
+}
+
+/* Ensure SVG icons in dark theme inherit color (use currentColor) so we can control them via CSS */
+.theme-dark .dice-counter button,
+.theme-dark .dice-card,
+.theme-dark .timeline-icon,
+.theme-dark .macro-delete,
+.theme-dark .icon-btn{
+  color: var(--accent-strong);
+}
+.theme-dark .dice-counter button svg,
+.theme-dark .dice-card svg,
+.theme-dark .timeline-icon svg,
+.theme-dark .macro-delete svg,
+.theme-dark .icon-btn svg{
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+/* Dice card internals readable */
+.theme-dark .dice-type,.theme-dark .dice-counter,.theme-dark .dice-card .count{color:var(--ink)}
+
+/* In dark mode: invert dice selector card internals - dark container, neon icons */
+.theme-dark .dice-visual{background:linear-gradient(180deg,rgba(3,8,18,0.85),rgba(8,4,18,0.6)) !important;border-radius:12px;padding:8px;box-shadow:inset 0 2px 8px rgba(0,0,0,0.6);border:1px solid rgba(0,0,0,0.35)}
+.theme-dark .dice-visual .die-shape{filter:drop-shadow(0 8px 28px rgba(0,255,213,0.08));}
+.theme-dark .die-face-top{fill:rgba(0,255,213,0.16) !important}
+.theme-dark .die-face-left{fill:rgba(0,255,213,0.12) !important}
+.theme-dark .die-face-right{fill:rgba(0,255,213,0.08) !important}
+.theme-dark .die-outline{stroke:rgba(0,255,213,0.48) !important}
+
+/* Make dice counter buttons dark for contrast */
+.theme-dark .dice-counter button{background:rgba(0,0,0,0.55);color:var(--ink);box-shadow:none;border:1px solid rgba(255,255,255,0.02)}
+
+
+
+/* Timeline readability */
+.theme-dark .timeline-row{background:linear-gradient(180deg,rgba(0,0,0,0.28),rgba(0,0,0,0.22));border:1px solid rgba(0,255,213,0.04)}
+.theme-dark .timeline-time,.theme-dark .timeline-label-text,.theme-dark .timeline-value,.theme-dark .timeline-total{color:var(--ink)}
+.theme-dark .timeline-die{background:linear-gradient(180deg,rgba(0,255,213,0.04),rgba(0,255,213,0.02));border:1px solid rgba(0,255,213,0.08);color:var(--ink)}
+
+/* Make sure native button text isn't browser-default black */
+.theme-dark button, .theme-dark input, .theme-dark select, .theme-dark textarea{color:var(--ink)}
+
+.macro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.macro-grid .hint{grid-column:1 / -1}
+.macro-card{position:relative;background:rgba(31,26,23,0.04);border-radius:16px;padding:10px;border:1px solid transparent}
+.theme-dark .macro-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-color:rgba(255,255,255,0.02)}
+.macro-card:hover{border-color:rgba(0,255,213,0.06)}
+.macro-run{width:100%;border:none;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.92));display:flex;flex-direction:row;align-items:center;gap:10px;padding:10px;border-radius:12px;cursor:pointer;color:#031019}
+.macro-emoji{font-size:22px}
+.macro-name{font-weight:700}
+.macro-text{color:var(--muted);font-size:12px}
+.macro-delete{position:absolute;top:10px;right:10px;border:none;background:rgba(255,255,255,0.03);color:#ff6a6a;font-size:14px;cursor:pointer;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center}
+
+/* In dark mode, make create/collapse and macro run use light background + dark text */
+.theme-dark .collapse-btn{background:rgba(255,255,255,0.94);color:#031019;border:1px solid rgba(0,0,0,0.08);box-shadow:0 6px 18px rgba(0,0,0,0.25)}
+.theme-dark .macro-run{background:linear-gradient(180deg,rgba(255,255,255,0.94),rgba(255,255,255,0.92));color:#031019}
+.theme-dark .macro-text{color:#031019}
+
+.timeline-panel{min-height:240px}
+.timeline{display:flex;flex-direction:column;gap:12px;max-height:340px;overflow:auto;padding-right:6px}
+.timeline-row{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:10px;border-radius:14px;background:rgba(31,26,23,0.03)}
+.theme-dark .timeline-row{background:rgba(255,255,255,0.04)}
+.timeline-time{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.timeline-content{display:flex;flex-direction:column;gap:8px}
+.timeline-label-text{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.timeline-dice{display:flex;flex-wrap:wrap;gap:8px}
+.timeline-die{display:flex;align-items:center;gap:6px;background:var(--panel);border-radius:999px;padding:4px 8px;border:1px solid var(--line)}
+.timeline-icon{width:18px;height:18px}
+.timeline-icon .die-outline{stroke:rgba(32,24,18,0.4)}
+.timeline-icon .die-face-left{fill:#f2e6d7}
+.timeline-icon .die-face-right{fill:#e6d6c5}
+.timeline-icon .die-face-top{fill:#fbf3ea}
+.theme-dark .timeline-icon .die-outline{stroke:rgba(0,255,213,0.9)}
+.theme-dark .timeline-icon .die-face-left{fill:rgba(0,255,213,0.28)}
+.theme-dark .timeline-icon .die-face-right{fill:rgba(0,255,213,0.20)}
+.theme-dark .timeline-icon .die-face-top{fill:rgba(0,255,213,0.36)}
+.timeline-value{font-weight:700}
+.timeline-label{display:none}
+.timeline-total{font-weight:700}
+
+.tv-stage{background:var(--tv-bg);color:var(--tv-text);border-radius:26px;padding:32px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;min-height:70vh;box-shadow:0 30px 80px rgba(0,0,0,0.45)}
+.tv-hero{display:flex;flex-direction:column;gap:18px}
+.tv-title{font-size:16px;letter-spacing:.5em;text-transform:uppercase;color:var(--tv-accent)}
+.tv-total{font-size:120px;font-weight:800;line-height:1;color:var(--tv-text)}
+.tv-meta{display:flex;gap:12px;align-items:center;font-size:18px;color:var(--tv-muted)}
+.tv-pill{background:rgba(21,26,34,0.8);padding:6px 14px;border-radius:999px;border:1px solid rgba(138,162,255,0.3)}
+.tv-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}
+.tv-results.rolling .tv-die{animation:tvPulse 1200ms cubic-bezier(.2,.7,.2,1)}
+.tv-die{background:var(--tv-panel);border-radius:20px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:8px;border:1px solid var(--tv-border)}
+.tv-die .die-shape{width:86px;height:86px}
+.tv-die .die-shape{filter:drop-shadow(0 10px 18px rgba(0,0,0,0.4))}
+.tv-die .die-shape .die-outline{stroke:rgba(138,162,255,0.7)}
+.tv-die .die-shape .die-face-left{fill:#1b2232}
+.tv-die .die-shape .die-face-right{fill:#141b29}
+.tv-die .die-shape .die-face-top{fill:#23304a}
+.tv-die-value{font-size:44px;font-weight:800}
+.tv-die-label{display:none}
+.tv-die{position:relative;overflow:hidden}
+.tv-die::after{content:"";position:absolute;inset:-6px;border-radius:22px;border:1px solid rgba(138,162,255,0.18)}
+.tv-stage{animation:fadeIn 700ms ease-out}
+
+@keyframes tvPulse{0%{transform:translateY(-30px) scale(.9);opacity:0}55%{transform:translateY(6px) scale(1.05)}100%{transform:translateY(0) scale(1);opacity:1}}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.tv-timeline{border-left:1px solid var(--tv-border);padding-left:20px}
+.timeline-title{font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--tv-accent);margin-bottom:10px}
+.timeline-list{display:flex;flex-direction:column;gap:10px;max-height:520px;overflow:auto}
+.timeline-item{display:grid;grid-template-columns:70px 1fr 80px;gap:12px;align-items:center;background:#10151f;border-radius:16px;padding:12px;border:1px solid rgba(138,162,255,0.12)}
+.timeline-item .timeline-time{color:var(--tv-muted);font-size:12px}
+.timeline-item .timeline-dice{display:flex;flex-wrap:wrap;gap:10px}
+.timeline-item .timeline-total{font-size:24px;font-weight:700;text-align:right}
+.timeline-item .timeline-icon{width:24px;height:24px}
+.timeline-item .timeline-icon .die-outline{stroke:rgba(138,162,255,0.6)}
+.timeline-item .timeline-icon .die-face-left{fill:#1b2232}
+.timeline-item .timeline-icon .die-face-right{fill:#141b29}
+.timeline-item .timeline-icon .die-face-top{fill:#23304a}
+.tv-empty{font-size:28px;color:var(--tv-muted)}
+
+/* TV view: make timeline items and die cards light in dark theme (match macro cards) */
+.theme-dark .timeline-item{background:linear-gradient(180deg,rgba(255,255,255,0.94),rgba(255,255,255,0.92));border:1px solid rgba(0,0,0,0.06);color:#031019}
+.theme-dark .timeline-item .timeline-time{color:#6b7280}
+.theme-dark .timeline-item .timeline-total{color:#031019}
+.theme-dark .timeline-item .timeline-icon .die-outline{stroke:rgba(0,0,0,0.18)}
+.theme-dark .timeline-item .timeline-icon .die-face-left{fill:#f3f4f6}
+.theme-dark .timeline-item .timeline-icon .die-face-right{fill:#e5e7eb}
+.theme-dark .timeline-item .timeline-icon .die-face-top{fill:#ffffff}
+
+.theme-dark .tv-die{background:linear-gradient(180deg,rgba(255,255,255,0.94),rgba(255,255,255,0.92));color:#031019;border:1px solid rgba(0,0,0,0.06)}
+.theme-dark .tv-die .die-shape .die-outline{stroke:rgba(0,0,0,0.12)}
+.theme-dark .tv-die .die-shape .die-face-left{fill:#f3f4f6}
+.theme-dark .tv-die .die-shape .die-face-right{fill:#e5e7eb}
+.theme-dark .tv-die .die-shape .die-face-top{fill:#ffffff}
+
+.app-tv{max-width:100%;padding:24px;background:linear-gradient(180deg,#0b0d12,#10141c)}
+.tv-container{padding-top:6px}
+
+.app-tv .tv-stage{border-radius:26px}
+
+.footer{margin-top:12px;display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+.footer-note{font-size:12px}
+
+/* Accessibility fixes from automated axe audit: increase contrast for small controls */
+/* Make small sidebar/action buttons use dark text over neon bg in dark theme */
+.theme-dark .sidebar-toggle,
+.theme-dark .theme-btn,
+.theme-dark .tv-btn{
+  color: #031019; /* dark text to contrast neon cyan */
+  background: var(--accent-strong);
+  border-color: rgba(0,0,0,0.18);
+}
+
+/* Footer notes: ensure readable in light theme by using darker text */
+.footer-note{color: rgba(31,26,23,0.72)}
+
+/* Sidebar header title in right sidebar: ensure contrast when macros panel uses muted colors */
+.sidebar-right > .sidebar-header > .panel-title{color:var(--muted)}
+.theme-dark .sidebar-right > .sidebar-header > .panel-title{color:#031019}
+/* Improve contrast by making the right sidebar header a light card in dark theme */
+.theme-dark .sidebar-right > .sidebar-header{
+  background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.92));
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+.theme-dark .sidebar-right > .sidebar-header .close-btn{color:#031019}
+
+@media (max-width:820px){
+  .header{flex-direction:column;align-items:flex-start}
+  .controls{width:100%;justify-content:flex-start}
+}
+
+@media (max-width:720px){
+  .app{padding:14px}
+  .panel{padding:14px}
+  .brand-mark{font-size:22px}
+  .brand-sub{font-size:11px;letter-spacing:.14em}
+  .controls{gap:8px}
+  .sidebar-toggle,.theme-btn,.tv-btn{font-size:12px;padding:6px 10px}
+  .toggle{font-size:12px}
+  .panel-title{letter-spacing:.12em}
+  .input,.select{padding:9px 10px}
+  .roll-actions{flex-direction:column;align-items:flex-start}
+  .tv-total{font-size:72px}
+  .tv-results{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+  .dice-area{min-height:220px}
+  .footer{flex-direction:column;align-items:flex-start;gap:6px}
+}
+
+@media (max-width:900px){
+  .macro-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+@media (max-width:520px){
+  .macro-grid{grid-template-columns:1fr}
+  .icon-grid{grid-template-columns:repeat(auto-fit,minmax(44px,1fr))}
+}
+
+/* animations */
+@keyframes rollIn{0%{transform:translateY(-80px) rotate(-40deg) scale(.6);opacity:0}50%{transform:translateY(12px) rotate(20deg) scale(1.08)}100%{transform:translateY(0) rotate(0) scale(1);opacity:1}}
+@keyframes glowPulse{0%{box-shadow:0 0 0 rgba(217,119,6,0)}50%{box-shadow:0 0 30px rgba(217,119,6,0.35)}100%{box-shadow:0 0 0 rgba(217,119,6,0)}}
+.die.rolling{animation:rollIn var(--roll-duration,700ms) cubic-bezier(.17,.67,.29,1.02)}
+.die.rolling::after{content:"";position:absolute;inset:-10px;border-radius:22px;border:2px dashed rgba(217,119,6,0.45);animation:glowPulse var(--roll-duration,700ms) ease-out}
