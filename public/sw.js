@@ -1,10 +1,10 @@
-const CACHE_NAME = 'dados-cache-v1';
+const CACHE_NAME = 'dados-cache-v2';
+// Get base URL from the service worker's own location
+const BASE_URL = self.location.pathname.substring(0, self.location.pathname.lastIndexOf('/') + 1);
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/src/main.jsx',
-  '/src/styles.css',
-  '/manifest.json'
+  BASE_URL,
+  BASE_URL + 'index.html',
+  BASE_URL + 'manifest.json'
 ];
 
 self.addEventListener('install', (e) => {
