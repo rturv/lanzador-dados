@@ -149,6 +149,7 @@ export default function App(){
   function onRollClick(){
     const cfg = buildConfig()
     if(cfg.length===0) return
+    setQuickText(formatConfig(cfg, modifier))
     doRoll(cfg, modifier)
   }
 
@@ -173,6 +174,7 @@ export default function App(){
 
   function handleRunMacro(m){
     if(!m.config || m.config.length===0) return
+    setQuickText(formatConfig(m.config, m.modifier || 0))
     doRoll(m.config, m.modifier || 0)
   }
 
