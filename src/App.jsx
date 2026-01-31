@@ -23,6 +23,7 @@ export default function App(){
   const [macroEditorOpen, setMacroEditorOpen] = useState(false)
   const [quickText, setQuickText] = useState('1d20')
   const [modifier, setModifier] = useState(0)
+  const [lastRollModifier, setLastRollModifier] = useState(0)
   const [theme, setTheme] = useState('light')
 
   useEffect(()=>{
@@ -141,6 +142,7 @@ export default function App(){
       const modValue = Number(mod) || 0
       const stamped = {...result, baseTotal, modifier: modValue, total: baseTotal + modValue, timestamp: Date.now(), config: cfg, label: formatConfig(cfg, modValue)}
       setResults(result.items)
+      setLastRollModifier(modValue)
       setHistory(h=>[stamped,...h].slice(0,30))
       setRolling(false)
     },delay)
@@ -305,7 +307,7 @@ export default function App(){
                 <button className="roll-btn" onClick={onQuickRoll}>Lanzar rapido</button>
               </div>
             </div>
-            <DicePanel results={results} rolling={rolling} tvMode={tvMode} />
+            <DicePanel results={results} rolling={rolling} tvMode={tvMode} modifier={lastRollModifier} />
             <div className="panel timeline-panel">
               <div className="panel-title">Linea de tiempo</div>
               <div className="timeline">
