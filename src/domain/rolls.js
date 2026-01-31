@@ -1,6 +1,14 @@
 // Domain: dice rolling logic (pure, testable)
+
+function getRandomNumber() {
+  // Usar crypto.getRandomValues para mejor calidad aleatoria
+  const array = new Uint32Array(1)
+  crypto.getRandomValues(array)
+  return array[0] / (0xffffffff + 1)
+}
+
 export function rollDie(sides) {
-  return Math.floor(Math.random() * sides) + 1
+  return Math.floor(getRandomNumber() * sides) + 1
 }
 
 export function rollMultiple(sides, count) {
