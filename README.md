@@ -6,6 +6,8 @@
 [![PWA](https://img.shields.io/badge/PWA-Ready-5a0fc8?logo=pwa)](https://web.dev/progressive-web-apps/)
 [![Vite](https://img.shields.io/badge/Vite-5.0-646cff?logo=vite)](https://vitejs.dev/)
 
+Desarrollado con vibe coding y copilot
+
 ## ✨ Características
 
 ### 🎯 Sistema de Dados Completo
