@@ -367,11 +367,13 @@ export default function App(){
               <div className="panel-title">Macros</div>
               <button className="close-btn" onClick={()=>setMacroOpen(false)}>×</button>
             </div>
-            <MacroList macros={macros} onRun={handleRunMacro} onDelete={handleDeleteMacro} />
-            <button className="collapse-btn" onClick={()=>setMacroEditorOpen(o=>!o)}>
-              {macroEditorOpen ? 'Ocultar creador' : 'Crear macro'}
-            </button>
-            {macroEditorOpen && <MacroEditor onSave={handleSaveMacro} />}
+            <div className="macro-sidebar-content">
+              <MacroList macros={macros} onRun={handleRunMacro} onDelete={handleDeleteMacro} />
+              <button className="collapse-btn" onClick={()=>setMacroEditorOpen(o=>!o)}>
+                {macroEditorOpen ? 'Ocultar creador' : 'Crear macro'}
+              </button>
+              {macroEditorOpen && <MacroEditor onSave={handleSaveMacro} />}
+            </div>
           </aside>
           {(diceOpen || macroOpen) && <div className="sidebar-backdrop" onClick={()=>{setDiceOpen(false);setMacroOpen(false)}} />}
         </div>
