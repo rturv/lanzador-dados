@@ -428,19 +428,20 @@ body{margin:0;background:radial-gradient(circle at top left,var(--bg),var(--bg-d
 @media (max-width:520px){
   .macro-grid{grid-template-columns:1fr}
   .icon-grid{grid-template-columns:repeat(auto-fit,minmax(44px,1fr))}
-  .dice-area{min-height:80px;gap:6px;padding:6px}
+  .dice-area{min-height:50px;gap:6px;padding:6px;flex:1}
   .panel{padding:6px}
-  .roll-actions{margin-top:6px;gap:6px}
+  .roll-actions{margin-top:6px;gap:6px;flex-shrink:0}
   .roll-btn{padding:8px 14px;font-size:13px}
-  .sidebar-left{max-height:85vh;overflow-y:auto}
+  .sidebar-left{max-height:90vh;overflow-y:auto;display:flex;flex-direction:column}
+  .sidebar-left > .panel:first-child{flex:1;min-height:0;display:flex;flex-direction:column}
 }
 
 @media (max-width:400px){
-  .dice-area{min-height:60px;gap:4px;padding:4px}
+  .dice-area{min-height:40px;gap:4px;padding:4px}
   .panel{padding:4px}
   .roll-actions{margin-top:4px;gap:4px}
   .roll-btn{padding:6px 12px;font-size:12px}
-  .sidebar-left{max-height:80vh}
+  .sidebar-left{max-height:95vh;overflow-y:auto}
 }
 
 /* animations */
