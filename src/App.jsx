@@ -151,12 +151,18 @@ export default function App(){
     if(cfg.length===0) return
     setQuickText(formatConfig(cfg, modifier))
     doRoll(cfg, modifier)
+    // Cerrar paneles en móvil para mostrar resultados
+    setDiceOpen(false)
+    setMacroOpen(false)
   }
 
   function onQuickRoll(){
     const parsed = parseText(quickText)
     if(parsed.config.length===0) return
     doRoll(parsed.config, parsed.modifier)
+    // Cerrar paneles en móvil para mostrar resultados
+    setDiceOpen(false)
+    setMacroOpen(false)
   }
 
   function handleSaveMacro(m){
@@ -176,6 +182,9 @@ export default function App(){
     if(!m.config || m.config.length===0) return
     setQuickText(formatConfig(m.config, m.modifier || 0))
     doRoll(m.config, m.modifier || 0)
+    // Cerrar paneles en móvil para mostrar resultados
+    setDiceOpen(false)
+    setMacroOpen(false)
   }
 
   function handleDeleteMacro(m){
