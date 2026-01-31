@@ -132,8 +132,10 @@ export default function App(){
 
   function doRoll(cfg, mod = 0){
     setRolling(true)
-    // Vibrate if supported
-    if(navigator.vibrate) navigator.vibrate(120)
+    // Vibrate if supported - pattern: short vibrations simulating dice rolling
+    if(navigator.vibrate) {
+      navigator.vibrate([50, 30, 50, 30, 80])
+    }
     // animate then compute
     const delay = tvMode ? 1200 : 700
     setTimeout(()=>{
