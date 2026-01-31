@@ -24,9 +24,19 @@
   font-family: "Space Grotesk", "Manrope", "Segoe UI", system-ui, sans-serif;
 }
 *{box-sizing:border-box}
-html,body,#root{height:100%}
+html,body,#root{height:100%;width:100%}
 body.no-scroll{overflow:hidden}
-body{margin:0;background:radial-gradient(circle at top left,var(--bg),var(--bg-deep));color:var(--ink)}
+body{
+  margin:0;
+  padding:0;
+  background:radial-gradient(circle at top left,var(--bg),var(--bg-deep));
+  color:var(--ink);
+  /* Support for iPhone notch and safe areas */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  /* Prevent overscroll bounce on iOS */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 .theme-dark{
   /* Synthwave-inspired dark theme */
