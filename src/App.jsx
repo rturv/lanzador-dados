@@ -339,7 +339,9 @@ export default function App(){
               </div>
             </div>
             <div className="footer">
-              <div className="footer-note">PWA lista · Offline listo</div>
+              <div className="footer-note">
+                PWA lista · Offline listo · <a href="https://github.com/rturv/lanzador-dados" target="_blank" rel="noopener noreferrer" style={{opacity: 0.5, textDecoration: 'none'}}>By rturv (GitHub)</a>
+              </div>
               <div className="footer-note">Tiradas recientes: {history.length}</div>
             </div>
           </main>
