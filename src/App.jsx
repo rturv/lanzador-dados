@@ -234,6 +234,22 @@ export default function App(){
         </div>
       ) : (
         <div className="app-shell">
+          {/* Accesos rápidos a macros - solo visible en móvil */}
+          {macros.length > 0 && (
+            <div className="macro-quick-access">
+              {macros.map(m => (
+                <button
+                  key={m.id}
+                  className="macro-quick-btn"
+                  onClick={() => handleRunMacro(m)}
+                  title={`Ejecutar: ${m.name}`}
+                >
+                  <span className="macro-quick-icon">{m.icon || '🎲'}</span>
+                  <span className="macro-quick-name">{m.name}</span>
+                </button>
+              ))}
+            </div>
+          )}
           <aside className={`sidebar sidebar-left ${diceOpen ? 'open' : ''}`}>
             <div className="sidebar-header">
               <div className="panel-title">Dados</div>
