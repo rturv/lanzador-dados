@@ -21,7 +21,7 @@ export default function App(){
   const [diceOpen, setDiceOpen] = useState(false)
   const [macroOpen, setMacroOpen] = useState(false)
   const [macroEditorOpen, setMacroEditorOpen] = useState(false)
-  const [quickText, setQuickText] = useState('2d20+1d6')
+  const [quickText, setQuickText] = useState('1d20')
   const [modifier, setModifier] = useState(0)
   const [theme, setTheme] = useState('light')
 
