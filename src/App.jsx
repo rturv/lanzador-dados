@@ -211,10 +211,6 @@ export default function App(){
               <span className="tv-emoji">📺</span>
               Pantalla TV
             </button>
-            <label className="toggle">
-              <input type="checkbox" checked={tvMode} onChange={e=>setTvMode(e.target.checked)} />
-              <span>Modo TV</span>
-            </label>
           </div>
         </div>
       )}
