@@ -186,7 +186,7 @@ export default function App(){
   const latest = history[0]
 
   function openTvScreen(){
-    window.open('/tv.html','dados-tv','width=1280,height=720')
+    window.open('/lanzador-dados/tv.html','dados-tv','width=1280,height=720')
   }
 
   return (

@@ -152,6 +152,14 @@ body{margin:0;background:radial-gradient(circle at top left,var(--bg),var(--bg-d
 
 .dice-area{min-height:320px;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start;padding:10px;background:linear-gradient(180deg,#fdfcfb,#f6f0e8)}
 .theme-dark .dice-area{background:linear-gradient(180deg,#0b0420,#060014);}
+
+.total-die{width:96px;height:96px;border-radius:18px;background:linear-gradient(145deg,var(--accent),var(--accent-strong));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;font-weight:800;color:#fff;box-shadow:0 12px 28px rgba(217,119,6,0.25), 0 4px 12px rgba(217,119,6,0.3);position:relative;overflow:hidden;border:2px solid rgba(255,255,255,0.2)}
+.theme-dark .total-die{background:linear-gradient(145deg,var(--accent),var(--accent-strong));box-shadow:0 18px 48px rgba(255,45,149,0.4), 0 0 18px rgba(0,255,213,0.1) inset, 0 4px 16px rgba(255,45,149,0.3);border:2px solid rgba(255,255,255,0.3)}
+.total-die.tv{width:130px;height:130px}
+.tv .total-value{font-size:84px}
+.tv .total-label{font-size:11px}
+.total-label{font-size:9px;font-weight:700;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:-4px}
+.total-value{font-size:64px;font-weight:800;line-height:1}
 .die{width:96px;height:96px;border-radius:18px;background:linear-gradient(180deg,#fff6ea,#f3e4d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;font-weight:700;color:var(--ink);box-shadow:0 12px 28px rgba(23,16,11,0.12);position:relative;overflow:hidden}
 .theme-dark .die{background:linear-gradient(180deg,#23102a,#0e0714);box-shadow:0 18px 48px rgba(0,0,0,0.7), 0 0 18px rgba(255,45,149,0.06) inset;border:1px solid rgba(255,45,149,0.06)}
 .die.tv{width:130px;height:130px}
@@ -434,6 +442,8 @@ body{margin:0;background:radial-gradient(circle at top left,var(--bg),var(--bg-d
   .roll-btn{padding:8px 14px;font-size:13px}
   .sidebar-left{max-height:90vh;overflow-y:auto;display:flex;flex-direction:column}
   .sidebar-left > .panel:first-child{flex:1;min-height:0;display:flex;flex-direction:column}
+  .total-label{font-size:8px}
+  .total-value{font-size:52px}
 }
 
 @media (max-width:400px){
@@ -442,6 +452,8 @@ body{margin:0;background:radial-gradient(circle at top left,var(--bg),var(--bg-d
   .roll-actions{margin-top:4px;gap:4px}
   .roll-btn{padding:6px 12px;font-size:12px}
   .sidebar-left{max-height:95vh;overflow-y:auto}
+  .total-label{font-size:7px}
+  .total-value{font-size:44px}
 }
 
 /* animations */
