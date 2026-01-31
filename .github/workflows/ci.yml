@@ -1,0 +1,32 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create .env from secret (optional)
+        if: env.CREATE_ENV == 'true'
+        env:
+          VITE_SHOW_TV: ${{ secrets.VITE_SHOW_TV }}
+        run: |
+          echo "VITE_SHOW_TV=$VITE_SHOW_TV" > .env
+
+      - name: Build
+        env:
+          VITE_SHOW_TV: ${{ secrets.VITE_SHOW_TV }}
+        run: npm run build
+
+      - name: Run tests
+        run: npm test

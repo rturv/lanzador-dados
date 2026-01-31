@@ -187,3 +187,33 @@ MIT
 ---
 
 **[By rturv (GitHub)](https://github.com/rturv/lanzador-dados)** · Hecho con ❤️ para jugadores de rol
+
+## ⚙️ Configuración en CI (GitHub Actions)
+
+El fichero `.env` no debe subirse al repositorio. Para publicar y construir desde GitHub Actions, usa GitHub Secrets y pasa las variables al job de build.
+
+Pasos recomendados:
+
+- Añadir el secret `VITE_SHOW_TV` en Settings → Secrets → Actions (valor `true` o `false`).
+- Opcionalmente crear el fichero `.env` dentro del job usando el secret si alguna herramienta lo necesita:
+
+```yaml
+- name: Create .env from secret (optional)
+    env:
+        VITE_SHOW_TV: ${{ secrets.VITE_SHOW_TV }}
+    run: |
+        echo "VITE_SHOW_TV=$VITE_SHOW_TV" > .env
+```
+
+- Alternativa más simple: exportar la variable en el paso `Build` (no hace falta fichero):
+
+```yaml
+- name: Build
+    env:
+        VITE_SHOW_TV: ${{ secrets.VITE_SHOW_TV }}
+    run: npm run build
+```
+
+He incluido un workflow de ejemplo en `.github/workflows/ci.yml` que muestra ambas opciones.
+
+También se añade `.env.example` en la raíz con las claves esperadas para que colaboradores sepan qué variables configurar.

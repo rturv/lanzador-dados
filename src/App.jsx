@@ -25,6 +25,9 @@ export default function App(){
   const [modifier, setModifier] = useState(0)
   const [lastRollModifier, setLastRollModifier] = useState(0)
   const [theme, setTheme] = useState('light')
+  // Mostrar el botón de TV según la variable de entorno VITE_SHOW_TV
+  // Fallback seguro a 'false' si no existe la variable (o está vacía)
+  const SHOW_TV = String((import.meta.env.VITE_SHOW_TV ?? 'false')).trim().toLowerCase() === 'true'
 
   useEffect(()=>{
     setMacros(MacroRepository.load())
@@ -220,10 +223,12 @@ export default function App(){
             <button className="theme-btn" onClick={()=>setTheme(t=>t==='dark'?'light':'dark')}>
               {theme === 'dark' ? 'Claro' : 'Oscuro'}
             </button>
-            <button className="tv-btn" onClick={openTvScreen} title="Abrir pantalla TV">
-              <span className="tv-emoji">📺</span>
-              Pantalla TV
-            </button>
+            {SHOW_TV && (
+              <button className="tv-btn" onClick={openTvScreen} title="Abrir pantalla TV">
+                <span className="tv-emoji">📺</span>
+                Pantalla TV
+              </button>
+            )}
           </div>
         </div>
       )}
