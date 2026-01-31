@@ -32,16 +32,27 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
       - name: Install dependencies
         run: npm ci
-      
+
+      - name: Create .env from secret (optional)
+        if: env.CREATE_ENV == 'true'
+        env:
+          VITE_SHOW_TV: ${{ secrets.VITE_SHOW_TV }}
+        run: |
+          echo "VITE_SHOW_TV=$VITE_SHOW_TV" > .env
+
+      - name: Run tests
+        run: npm test
+
       - name: Build
+        env:
+          VITE_SHOW_TV: ${{ secrets.VITE_SHOW_TV }}
         run: npm run build
-      
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
