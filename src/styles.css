@@ -114,7 +114,20 @@ body{
 .sidebar-header{display:none}
 .close-btn{border:none;background:transparent;font-size:22px;cursor:pointer;color:var(--muted)}
 .theme-dark .close-btn{color:var(--ink)}
-.collapse-btn{border:none;background:var(--panel);border:1px solid var(--line);padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:600}
+.collapse-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  padding:8px 12px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+  transition:transform 120ms ease, box-shadow 160ms ease;
+  width:100%;
+  justify-content:center;
+}
 .sidebar-toggle{display:none;border:1px solid var(--line);background:var(--panel);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:600}
 .theme-btn{border:1px solid var(--line);background:var(--panel);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:600}
 .sidebar-backdrop{display:none}
@@ -365,7 +378,13 @@ body{
 .macro-delete{position:absolute;top:10px;right:10px;border:none;background:rgba(255,255,255,0.03);color:#ff6a6a;font-size:14px;cursor:pointer;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center}
 
 /* In dark mode, make create/collapse button match the dark theme */
-.theme-dark .collapse-btn{background:var(--accent-strong);color:#031019;border:1px solid rgba(0,0,0,0.18);box-shadow:0 10px 30px rgba(0,255,213,0.08)}
+.theme-dark .collapse-btn{
+  background:var(--accent-strong);
+  color:#031019;
+  border:1px solid rgba(0,0,0,0.18);
+  box-shadow:0 10px 30px rgba(0,255,213,0.08);
+  border-radius:999px;
+}
 .theme-dark .macro-run{background:linear-gradient(180deg,rgba(255,255,255,0.94),rgba(255,255,255,0.92));color:#031019}
 /* Macro text should stay light against the dark card background */
 .theme-dark .macro-text{color:rgba(237,242,255,0.78)}
