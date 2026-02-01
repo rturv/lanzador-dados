@@ -231,9 +231,31 @@ body{
 .dice-type{font-weight:700;text-transform:uppercase;letter-spacing:.1em}
 .dice-counter{display:flex;align-items:center;gap:10px;background:rgba(31,26,23,0.06);border-radius:999px;padding:6px 10px}
 .theme-dark .dice-counter{background:rgba(255,255,255,0.06)}
-.dice-counter button{width:28px;height:28px;border:none;border-radius:999px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;font-weight:700}
-.dice-counter button svg{display:block}
-.dice-counter button{display:flex;align-items:center;justify-content:center;padding:0}
+.dice-counter button{
+  width:24px;
+  height:24px;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  font-weight:700;
+  font-size:18px;
+  color:#0f0f0f; /* negro en claro */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  line-height:1;
+}
+.dice-counter button svg{
+  display:block;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+  min-width:18px;
+  min-height:18px;
+  width:18px !important;
+  height:18px !important;
+}
 .dice-counter button:focus{outline:2px solid rgba(0,255,213,0.18);outline-offset:2px}
 .dice-counter .count{width:24px;text-align:center;font-weight:700}
 
@@ -245,9 +267,65 @@ body{
 .modifier-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:8px 10px;border-radius:12px;background:rgba(31,26,23,0.04)}
 .theme-dark .modifier-row{background:rgba(255,255,255,0.04)}
 .modifier-label{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
-.modifier-control{display:flex;align-items:center;gap:8px}
-.modifier-control button{width:26px;height:26px;border:none;border-radius:999px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;font-weight:700}
-.modifier-control input{width:70px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);background:var(--panel);font-weight:700;text-align:center}
+.modifier-control{display:flex;align-items:center;gap:6px}
+.modifier-control button{
+  width:24px;
+  height:24px;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  font-weight:700;
+  font-size:18px;
+  color:#0f0f0f; /* negro en claro */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  padding:0;
+}
+.theme-dark .modifier-control button{
+  background:transparent;
+  border:none;
+  color:#ffffff;
+  box-shadow:none;
+}
+.modifier-control button svg{
+  display:block;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+  min-width:18px;
+  min-height:18px;
+  width:18px !important;
+  height:18px !important;
+}
+
+/* Hover affordance for icon-only controls */
+.dice-counter button:hover,
+.modifier-control button:hover{
+  background:rgba(0,0,0,0.05);
+  border-radius:8px;
+}
+.theme-dark .dice-counter button,
+.theme-dark .modifier-control button{
+  color:#ffffff;
+  background:transparent;
+  text-shadow:0 0 6px rgba(0,0,0,0.45);
+}
+.theme-dark .dice-counter button:hover,
+.theme-dark .modifier-control button:hover{
+  background:rgba(255,255,255,0.12);
+}
+.modifier-control input{width:60px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);background:var(--panel);font-weight:700;text-align:center}
+/* Ocultar spinners de input[type="number"] */
+.modifier-control input[type="number"]::-webkit-inner-spin-button,
+.modifier-control input[type="number"]::-webkit-outer-spin-button{
+  -webkit-appearance:none;
+  margin:0;
+}
+.modifier-control input[type="number"]{
+  -moz-appearance:textfield;
+}
 
 .dice-area{min-height:320px;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start;padding:10px;background:linear-gradient(180deg,#fdfcfb,#f6f0e8)}
 .theme-dark .dice-area{background:linear-gradient(180deg,#0b0420,#060014);}
@@ -318,15 +396,13 @@ body{
   .theme-dark .roll-btn{animation: none}
 }
 
-/* Ensure SVG icons in dark theme inherit color (use currentColor) so we can control them via CSS */
-.theme-dark .dice-counter button,
+/* Ensure SVG icons inherit currentColor so we can recolor per theme */
 .theme-dark .dice-card,
 .theme-dark .timeline-icon,
 .theme-dark .macro-delete,
 .theme-dark .icon-btn{
   color: var(--accent-strong);
 }
-.theme-dark .dice-counter button svg,
 .theme-dark .dice-card svg,
 .theme-dark .timeline-icon svg,
 .theme-dark .macro-delete svg,
@@ -346,8 +422,8 @@ body{
 .theme-dark .die-face-right{fill:rgba(0,255,213,0.08) !important}
 .theme-dark .die-outline{stroke:rgba(0,255,213,0.48) !important}
 
-/* Make dice counter buttons dark for contrast */
-.theme-dark .dice-counter button{background:rgba(0,0,0,0.55);color:var(--ink);box-shadow:none;border:1px solid rgba(255,255,255,0.02)}
+/* Make dice counter buttons use neon color, no background in dark mode */
+.theme-dark .dice-counter button{background:transparent;color:var(--accent-strong);box-shadow:none;border:none}
 
 
 
